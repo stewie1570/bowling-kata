@@ -1,6 +1,6 @@
 import { BowlingScoreBoard } from '../../src/scoring';
 
-describe('Bowling Scoring', () => {
+describe('Scoring', () => {
 	var scorer;
 
 	beforeEach(() => scorer = new BowlingScoreBoard())
