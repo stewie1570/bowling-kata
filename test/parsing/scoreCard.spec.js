@@ -71,5 +71,53 @@ describe('Score Card Parser', () => {
             
             expect(exceptionMessage).to.equal('Can\'t have more than 2 rolls per frame.');
         });
+        
+        it('cant have more than 10 frames', () => {
+            var exceptionMessage = '';
+            try{
+                parser.parse({delimitedScores: '1,0|2,0|3,0|4,0|5,0|6,0|7,0|8,0|9,0|10,0|10,0'});
+            }
+            catch(ex){
+                exceptionMessage = ex.message;
+            }
+            
+            expect(exceptionMessage).to.equal('Can\'t have more than 10 frames.');
+        });
+        
+        it('cant have more than three rolls in 10th frame', () => {
+            var exceptionMessage = '';
+            try{
+                parser.parse({delimitedScores: '1,0|2,0|3,0|4,0|5,0|6,0|7,0|8,0|9,0|10,0,1,1'});
+            }
+            catch(ex){
+                exceptionMessage = ex.message;
+            }
+            
+            expect(exceptionMessage).to.equal('Can\'t have more than three rolls in 10th frame.');
+        });
+        
+        it('cant have a frame total more than 10 before the 10th frame', () => {
+            var exceptionMessage = '';
+            try{
+                parser.parse({delimitedScores: '3,1|9,8'});
+            }
+            catch(ex){
+                exceptionMessage = ex.message;
+            }
+            
+            expect(exceptionMessage).to.equal('Can\'t have a frame total more than 10 before the 10th frame.');
+        });
+        
+        it('10th frame cant have a frame total more than 30.', () => {
+            var exceptionMessage = '';
+            try{
+                parser.parse({delimitedScores: '1,0|2,0|3,0|4,0|5,0|6,0|7,0|8,0|9,0|11,10,10'});
+            }
+            catch(ex){
+                exceptionMessage = ex.message;
+            }
+            
+            expect(exceptionMessage).to.equal('10th frame cant have a frame total more than 30.');
+        });
     });
 });
