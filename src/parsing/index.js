@@ -15,7 +15,7 @@ export class BowlingScoreCardParser {
             })
             .value();
             
-        if(_(frames).some(frame => frame.rolls.length > 2))
+        if(_(frames).take(9).some(frame => frame.rolls.length > 2))
             throw new Error(`Can't have more than 2 rolls per frame.`);
             
         return frames;
@@ -27,7 +27,7 @@ export class BowlingScoreCardParser {
 
         var toIntegerRoll = stringRoll => {
             var val = parseInt(stringRoll);
-            if (!val)
+            if (Number.isNaN(val))
                 throw new Error(`Rolls need to be integers. "${stringRoll}" is not.`);
             return val;
         };

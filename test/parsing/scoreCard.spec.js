@@ -7,11 +7,18 @@ describe('Score Card Parser', () => {
 
     describe('Parsing', () => {
         it('should parse comma/pipe delimited rolls and frames', () => {
-            var results = parser.parse({ delimitedScores: '1,2|2,5|8,1' });
+            var results = parser.parse({ delimitedScores: '1,2|2,5|3,1|4,1|5,2|6,1|7,0|8,1|9,0|10,2,3' });
             expect(results).to.deep.equal([
                 { rolls: [1, 2] },
                 { rolls: [2, 5] },
-                { rolls: [8, 1] }
+                { rolls: [3, 1] },
+                { rolls: [4, 1] },
+                { rolls: [5, 2] },
+                { rolls: [6, 1] },
+                { rolls: [7, 0] },
+                { rolls: [8, 1] },
+                { rolls: [9, 0] },
+                { rolls: [10, 2, 3] },
             ]);
         });
     });
@@ -53,7 +60,7 @@ describe('Score Card Parser', () => {
             expect(exceptionMessage).to.equal('Rolls need to be integers. "blah" is not.');
         });
         
-        it('cant have more than two rolls per frame', () => {
+        it('cant have more than two rolls in first 9 frames', () => {
             var exceptionMessage = '';
             try{
                 parser.parse({delimitedScores: '1,2|3,4,5|4,3|1,2,3'});
