@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export class BowlingScoreCardParser {
+export class DelimitedStringBowlingScoreCardParser {
     parse({delimitedScores}) {
         if (delimitedScores.indexOf('|') < 0)
             throw new Error(`No pipe delimited frames in "${delimitedScores}".`);

@@ -1,9 +1,9 @@
-import { BowlingScoreCardParser } from '../../src/parsing';
+import { DelimitedStringBowlingScoreCardParser } from '../../src/parsing';
 
 describe('Score Card Parser', () => {
     var parser;
 
-    beforeEach(() => parser = new BowlingScoreCardParser());
+    beforeEach(() => parser = new DelimitedStringBowlingScoreCardParser());
 
     describe('Parsing', () => {
         it('should parse comma/pipe delimited rolls and frames', () => {
