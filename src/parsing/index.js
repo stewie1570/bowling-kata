@@ -9,9 +9,7 @@ export class BowlingScoreCardParser {
 
         var frames = _(frameStrings)
             .map(frameString => {
-                return {
-                    rolls: this._rollsFrom({ frameString })
-                };
+                return { rolls: this._rollsFrom({ frameString }) };
             })
             .value();
 
