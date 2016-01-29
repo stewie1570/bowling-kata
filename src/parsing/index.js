@@ -5,12 +5,12 @@ export class BowlingScoreCardParser {
         if (delimitedScores.indexOf('|') < 0)
             throw new Error(`No pipe delimited frames in "${delimitedScores}".`);
 
-        var frames = delimitedScores.split('|');
+        var frameStrings = delimitedScores.split('|');
 
-        return _(frames)
-            .map(frame => {
+        return _(frameStrings)
+            .map(frameString => {
                 return {
-                    rolls: this._rollsFrom({ commaDelimitedString: frame })
+                    rolls: this._rollsFrom({ commaDelimitedString: frameString })
                 };
             })
             .value();
