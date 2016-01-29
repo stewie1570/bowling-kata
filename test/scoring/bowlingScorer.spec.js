@@ -15,15 +15,13 @@ describe('Bowling Scoring', () => {
 				]
 			});
 		
-		var expectedBoard = {
+		expect(scoreBoard).to.deep.equal({
 			total: 14,
 			frames: [
                 { rolls: [1, 2], total: 3 },
                 { rolls: [2, 5], total: 7 },
                 { rolls: [3, 1], total: 4 }
             ]
-		};
-		
-		expect(scoreBoard).to.deep.equal(expectedBoard);
+		});
 	});
 });
