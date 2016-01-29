@@ -49,4 +49,11 @@ gulp.task('build-dev', ['clean'], function () {
 	});
 });
 
+gulp.task('build', ['clean'], function () {
+	return build({
+		sourceMap: false,
+		watch: false
+	});
+});
+
 gulp.task('default', ['tdd'], function (done) { });

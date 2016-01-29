@@ -1,3 +1,8 @@
+import {BowlingScoreCardParser} from './parsing';
+
 global.process = global.process || { argv: [] };
 
-console.log(`Hello, ${ global.process.argv.join(', ') }. It works!!`);
+console
+	.log(`Test: "${
+		JSON.stringify(new BowlingScoreCardParser().parse({ delimitedScores: global.process.argv[2] }))
+		}".`);
