@@ -42,7 +42,7 @@ gulp.task('build-prod', ['clean', 'test'], function () {
 	});
 });
 
-gulp.task('build-dev', ['clean', 'test'], function () {
+gulp.task('build-dev', ['clean'], function () {
 	return build({
 		sourceMap: false,
 		watch: true
