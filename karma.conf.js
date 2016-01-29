@@ -30,7 +30,7 @@ module.exports = function (config) {
 				preLoaders: [
 					{
 						test: /\.js$/,
-						exclude: path.resolve('node_modules/'),
+						exclude: [/node_modules/, /test/],
 						loader: 'isparta'
 					}
 				],
