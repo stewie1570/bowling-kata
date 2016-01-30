@@ -16,13 +16,7 @@ export class BowlingScoreBoard {
 
         var bonusTotalledFrames = _(totalledFrames)
             .zipWith(_(totalledFrames).takeRight(totalledFrames.length - 1).value(), (left, right) => {
-                // return {
-                //     rolls: left.rolls,
-                //     total: left.total + (left.total == 10
-                //         ? left.rolls.length == 1 ? right.total : _(right.rolls).first()
-                //         : 0)
-                // }
-                return {
+               return {
                     rolls: left.rolls,
                     total: left.total
                         + ((isStrick(left) && right && right.total) || 0)
