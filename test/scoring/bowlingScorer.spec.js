@@ -81,6 +81,21 @@ describe('Scoring', () => {
                 { rolls: [3, 1], total: 4 }
             ]);
         });
+        
+        it('total for strick frame is the subtotal when bonus rolls have not yet been rolled', () => {
+            var scoreBoard = scorer
+                .scoredGameFrom({
+                    frames: [
+                        { rolls: [1, 5] },
+                        { rolls: [10] }
+                    ]
+                });
 
+            expect(scoreBoard.total).to.equal(16);
+            expect(scoreBoard.frames).to.deep.equal([
+                { rolls: [1, 5], total: 6 },
+                { rolls: [10], total: 10 }
+            ]);
+        });
     });
 });
