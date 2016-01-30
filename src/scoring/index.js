@@ -10,14 +10,23 @@ export class BowlingScoreBoard {
                 };
             })
             .value();
+            
+        var isStrick = frame => frame.rolls.length == 1 && frame.total == 10;
+        var isSpare = frame => frame.rolls.length > 1 && frame.total == 10;
 
         var bonusTotalledFrames = _(totalledFrames)
             .zipWith(_(totalledFrames).takeRight(totalledFrames.length - 1).value(), (left, right) => {
+                // return {
+                //     rolls: left.rolls,
+                //     total: left.total + (left.total == 10
+                //         ? left.rolls.length == 1 ? right.total : _(right.rolls).first()
+                //         : 0)
+                // }
                 return {
                     rolls: left.rolls,
-                    total: left.total + (left.total == 10
-                        ? left.rolls.length == 1 ? right.total : _(right.rolls).first()
-                        : 0)
+                    total: left.total
+                        + ((isStrick(left) && right && right.total) || 0)
+                        + ((isSpare(left) && right && _(right.rolls).first()) || 0)
                 }
             })
             .value();
