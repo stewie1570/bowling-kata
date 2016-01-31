@@ -26,6 +26,40 @@ describe('Scoring', () => {
         });
     });
 
+    describe('Perfect Game', () => {
+        it('should total 300', () => {
+            var scoreBoard = scorer
+                .scoredGameFrom({
+                    frames: [
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10] },
+                        { rolls: [10, 10, 10] }
+                    ]
+                });
+            
+            expect(scoreBoard.total).to.equal(300);
+            expect(scoreBoard.frames).to.deep.equal([
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+                { rolls: [10, 10, 10], total: 30 },
+            ]);
+        });
+    });
+
     describe('Spare', () => {
         it('should add bonus of the next roll on frames scoring a spare', () => {
             var scoreBoard = scorer
@@ -81,7 +115,7 @@ describe('Scoring', () => {
                 { rolls: [3, 1], total: 4 }
             ]);
         });
-        
+
         it('total for strick frame is the subtotal when bonus rolls have not yet been rolled', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
