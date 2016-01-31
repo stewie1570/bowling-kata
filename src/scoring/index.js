@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {mapRight} from '../utilities';
 
 export class BowlingScoreBoard {
     scoredGameFrom({frames}) {
@@ -36,19 +37,12 @@ export class BowlingScoreBoard {
     }
 
     _framesContainingNextTwoRollsFrom({subTotalledFrames}) {
-        var i = 1;
-
-        return _(subTotalledFrames)
-            .zipWith(_(subTotalledFrames)
-                .map(frame => _(subTotalledFrames).takeRight(subTotalledFrames.length - i++))
-                .value(),
-                (current, framesAfterCurrent) => {
-                    return {
-                        rolls: current.rolls,
-                        total: current.total,
-                        nextTwoRolls: _(framesAfterCurrent).flatMap(frame => frame.rolls).take(2).value()
-                    };
-                })
-            .value();
+        return mapRight(subTotalledFrames, (current, framesAfterCurrent) => {
+            return {
+                rolls: current.rolls,
+                total: current.total,
+                nextTwoRolls: _(framesAfterCurrent).flatMap(frame => frame.rolls).take(2).value()
+            };
+        });
     }
 }
