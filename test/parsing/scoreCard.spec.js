@@ -22,7 +22,7 @@ describe('Score Card Parser', () => {
             ]);
         });
         
-        it('should should allow one roll on strike frames', () => {
+        it('should allow one roll on strike frames', () => {
             var results = parser.unScoredFramesFrom({ delimitedScores: '10' });
             expect(results).to.deep.equal([
                 { rolls: [10] }
