@@ -2,9 +2,6 @@ import _ from 'lodash';
 
 export class DelimitedStringBowlingScoreCardParser {
     unScoredFramesFrom({delimitedScores}) {
-        if (delimitedScores.indexOf('|') < 0)
-            throw new Error(`No pipe delimited frames in "${delimitedScores}".`);
-
         var frameStrings = delimitedScores.split('|');
 
         var frames = _(frameStrings)
@@ -19,9 +16,6 @@ export class DelimitedStringBowlingScoreCardParser {
     }
 
     _rollsFrom({frameString}) {
-        if (frameString.indexOf(',') < 0)
-            throw new Error(`No comma delimited rolls in "${frameString}".`);
-
         var toIntegerRoll = stringRoll => {
             var val = parseInt(stringRoll);
             if (Number.isNaN(val))

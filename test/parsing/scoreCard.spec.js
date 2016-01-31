@@ -21,33 +21,16 @@ describe('Score Card Parser', () => {
                 { rolls: [10, 2, 3] },
             ]);
         });
+        
+        it('should should allow one roll on strike frames', () => {
+            var results = parser.unScoredFramesFrom({ delimitedScores: '10' });
+            expect(results).to.deep.equal([
+                { rolls: [10] }
+            ]);
+        });
     });
     
     describe('Error Handling', () => {
-        it('should throw when no frames', () => {
-            var exceptionMessage = '';
-            try{
-                parser.unScoredFramesFrom({delimitedScores: 'blah'});
-            }
-            catch(ex){
-                exceptionMessage = ex.message;
-            }
-            
-            expect(exceptionMessage).to.equal('No pipe delimited frames in "blah".');
-        });
-        
-        it('should throw when no rolls', () => {
-            var exceptionMessage = '';
-            try{
-                parser.unScoredFramesFrom({delimitedScores: 'blah|blah'});
-            }
-            catch(ex){
-                exceptionMessage = ex.message;
-            }
-            
-            expect(exceptionMessage).to.equal('No comma delimited rolls in "blah".');
-        });
-        
         it('should throw when rolls are not integers', () => {
             var exceptionMessage = '';
             try{
