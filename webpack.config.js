@@ -13,5 +13,11 @@ module.exports = {
         ]
     },
     watch: true,
-    devtool: 'source-map'
+    devtool: 'source-map',
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            mangle: false
+        })
+    ]
 };
