@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export class DelimitedStringBowlingScoreCardParser {
-    parse({delimitedScores}) {
+    unScoredFramesFrom({delimitedScores}) {
         if (delimitedScores.indexOf('|') < 0)
             throw new Error(`No pipe delimited frames in "${delimitedScores}".`);
 
