@@ -46,9 +46,7 @@ export class BowlingScoreBoard {
                     return {
                         rolls: current.rolls,
                         total: current.total,
-                        nextTwoRolls: current.rolls.length === 3
-                            ? _(current.rolls).takeRight(2).value()
-                            : _(framesAfterCurrent).flatMap(frame => frame.rolls).take(2).value()
+                        nextTwoRolls: _(framesAfterCurrent).flatMap(frame => frame.rolls).take(2).value()
                     };
                 })
             .value();
