@@ -79,7 +79,7 @@ describe('Scoring', () => {
             ]);
         });
 
-        it('total for spare frame is the subtotal when bonus rolls have not yet been rolled', () => {
+        it('should total balls rolled without bonus when bonus rolls have not been rolled yet', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
                     frames: [
@@ -116,7 +116,7 @@ describe('Scoring', () => {
             ]);
         });
 
-        it('total for strike frame is the subtotal when bonus rolls have not yet been rolled', () => {
+        it('should total balls rolled without bonus when bonus rolls have not been rolled yet', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
                     frames: [
