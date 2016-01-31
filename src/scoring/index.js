@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {mapRight} from '../utilities';
+import {isStrike, isSpare} from './bonus-rules';
 
 export class BowlingScoreBoard {
     scoredGameFrom({frames}) {
@@ -21,9 +22,6 @@ export class BowlingScoreBoard {
     }
 
     _bonusAdjustedFramesFrom({subTotalledFrames}) {
-        var isStrike = frame => frame.rolls.length == 1 && frame.total == 10;
-        var isSpare = frame => frame.rolls.length > 1 && frame.total == 10;
-
         return _(this._framesContainingNextTwoRollsFrom({ subTotalledFrames }))
             .map(frame => {
                 return {
