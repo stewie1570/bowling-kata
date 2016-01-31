@@ -37,10 +37,10 @@ export class BowlingScoreBoard {
     }
 
     _framesContainingNextTwoRollsFrom({subTotalledFrames}) {
-        return mapRight(subTotalledFrames, (current, framesAfterCurrent) => {
+        return mapRight(subTotalledFrames, (currentFrame, framesAfterCurrent) => {
             return {
-                rolls: current.rolls,
-                total: current.total,
+                rolls: currentFrame.rolls,
+                total: currentFrame.total,
                 nextTwoRolls: _(framesAfterCurrent).flatMap(frame => frame.rolls).take(2).value()
             };
         });
