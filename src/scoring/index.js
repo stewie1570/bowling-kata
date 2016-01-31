@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 export class BowlingScoreBoard {
     scoredGameFrom({frames}) {
-        var totalledFrames = _(frames)
+        var subTotalledFrames = _(frames)
             .map(frame => {
                 return {
                     rolls: frame.rolls,
@@ -11,26 +11,19 @@ export class BowlingScoreBoard {
             })
             .value();
 
+        var bonusAdjustedFrames = this._bonusAdjustedFramesFrom({ subTotalledFrames });
+
+        return {
+            total: _(bonusAdjustedFrames).map(frame => frame.total).sum(),
+            frames: bonusAdjustedFrames
+        };
+    }
+
+    _bonusAdjustedFramesFrom({subTotalledFrames}) {
         var isStrike = frame => frame.rolls.length == 1 && frame.total == 10;
         var isSpare = frame => frame.rolls.length > 1 && frame.total == 10;
 
-        var i = 1;
-        var restOfFramesMatrix = _(totalledFrames)
-            .map(frame => _(totalledFrames).takeRight(totalledFrames.length - i++))
-            .value();
-        var totalledFramesWithNextTwoRolls = _(totalledFrames)
-            .zipWith(restOfFramesMatrix, (current, rest) => {
-                return {
-                    rolls: current.rolls,
-                    total: current.total,
-                    nextTwoRolls: current.rolls.length === 3
-                        ? _(current.rolls).takeRight(2).value()
-                        : _(rest).flatMap(frame => frame.rolls).take(2).value()
-                };
-            })
-            .value();
-
-        var bonusTotalledFrames = _(totalledFramesWithNextTwoRolls)
+        return _(this._framesContainingNextTwoRollsFrom({ subTotalledFrames }))
             .map(frame => {
                 return {
                     rolls: frame.rolls,
@@ -40,10 +33,24 @@ export class BowlingScoreBoard {
                 };
             })
             .value();
+    }
 
-        return {
-            total: _(bonusTotalledFrames).map(frame => frame.total).sum(),
-            frames: bonusTotalledFrames
-        };
+    _framesContainingNextTwoRollsFrom({subTotalledFrames}) {
+        var i = 1;
+
+        return _(subTotalledFrames)
+            .zipWith(_(subTotalledFrames)
+                .map(frame => _(subTotalledFrames).takeRight(subTotalledFrames.length - i++))
+                .value(),
+                (current, framesAfterCurrent) => {
+                    return {
+                        rolls: current.rolls,
+                        total: current.total,
+                        nextTwoRolls: current.rolls.length === 3
+                            ? _(current.rolls).takeRight(2).value()
+                            : _(framesAfterCurrent).flatMap(frame => frame.rolls).take(2).value()
+                    };
+                })
+            .value();
     }
 }
