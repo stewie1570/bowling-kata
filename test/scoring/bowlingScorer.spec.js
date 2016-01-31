@@ -116,7 +116,7 @@ describe('Scoring', () => {
             ]);
         });
 
-        it('total for strick frame is the subtotal when bonus rolls have not yet been rolled', () => {
+        it('total for strike frame is the subtotal when bonus rolls have not yet been rolled', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
                     frames: [
