@@ -1,2 +1,4 @@
-export var isStrike = frame => frame.rolls.length == 1 && frame.total == 10;
-export var isSpare = frame => frame.rolls.length > 1 && frame.total == 10;
+import _ from 'lodash';
+
+export var isStrike = frame => _(frame.rolls).every(roll => roll === 10);
+export var isSpare = frame => _(frame.rolls).every(roll => roll < 10) && frame.total >= 10;
