@@ -45,23 +45,27 @@ describe('UI Controller', () => {
 		}});
 		
 		//Assert
-		expect(_(receivedViewModel.frames).last().total).to.be.undefined;
+		expect(receivedViewModel.frames[1].total).to.be.undefined;
 	});
 	
-	// it('should not display total for strikes that dont have their bonus rolls yet', () => {
-	// 	//Arrange
-	// 	//Act
-	// 	controller.showGame({game: {
-	// 		frames: [
-    //             { rolls: [1, 2], total: 3 },
-    //             { rolls: [5, 5], total: 18 },
-	// 			{ rolls: [8] }
-    //         ]
-	// 	}});
-	// 	
-	// 	//Assert
-	// 	expect(receivedViewModel.frames[1].total).to.be.undefined;
-	// });
+	it('should not display total for strikes that dont have their bonus rolls yet', () => {
+		//Arrange
+		//Act
+		controller.showGame({game: {
+			frames: [
+                { rolls: [1, 2], total: 3 },
+                { rolls: [10], total: 32 },
+				{ rolls: [10], total: 42 },
+				{ rolls: [10], total: 52 }
+            ]
+		}});
+		
+		//Assert
+		var frameTotals = _(receivedViewModel.frames)
+			.map(frame => frame.total)
+			.value();
+		expect(frameTotals).to.deep.equal([3, 35, undefined, undefined]);
+	});
 	
 	it('should render spares with a forward slash', () => {
 		//Arrange

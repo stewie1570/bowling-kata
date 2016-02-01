@@ -8,22 +8,36 @@ export class BowlingGameController {
 
 	showGame({game}) {
 		var gameViewModel = {
-			frames: _(game.frames)
-				.map((frame, frameIndex) => {
-					return {
-						rolls: this._displayRollsFrom({ frame }),
-						total: (isSpare(frame) && frameIndex == game.frames.length - 1)
-							? undefined
-							: _(game.frames)
-								.map(frame => frame.total)
-								.take(frameIndex + 1)
-								.sum()
-					}
-				})
-				.value()
+			frames: this._displayFramesFrom({ game })
 		};
 
 		this.view.render(gameViewModel);
+	}
+
+	_displayFramesFrom({game}) {
+		return _(game.frames)
+			.map((frame, frameIndex) => {
+				var futureRollsCount = _(game.frames)
+					.takeRight(game.frames.length - frameIndex - 1)
+					.flatMap(frame => frame.rolls)
+					.value()
+					.length;
+
+				return {
+					rolls: this._displayRollsFrom({ frame }),
+					total: this._isMissingBonusRolls({ frame, futureRollsCount })
+						? undefined
+						: _(game.frames)
+							.map(frame => frame.total)
+							.take(frameIndex + 1)
+							.sum()
+				}
+			})
+			.value()
+	}
+
+	_isMissingBonusRolls({frame, futureRollsCount}) {
+		return (isSpare(frame) && futureRollsCount < 1) || (isStrike(frame) && futureRollsCount < 2);
 	}
 
 	_displayRollsFrom({frame}) {
