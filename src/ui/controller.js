@@ -51,6 +51,6 @@ export class BowlingGameController {
 	}
 
 	_displayStrike({rolls}) {
-		return rolls.length === 1 ? [' ', 'X'] : _(rolls).map(roll => 'X').value();
+		return rolls.length === 1 ? [' ', 'X'] : _(rolls).map(roll => roll === 10 ? 'X' : roll.toString()).value();
 	}
 }

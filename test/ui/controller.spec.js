@@ -88,13 +88,15 @@ describe('UI Controller', () => {
 		controller.showGame({game: {
 			frames: [
                 { rolls: [10], total: 30 },
-				{ rolls: [10, 10, 10], total: 30 }
+				{ rolls: [10, 10, 10], total: 30 },
+                { rolls: [10, 10, 9], total: 30 },
             ]
 		}});
 		
 		//Assert
 		expect(receivedViewModel.frames[0].rolls).to.deep.equal([' ', 'X']);
 		expect(receivedViewModel.frames[1].rolls).to.deep.equal(['X', 'X', 'X']);
+        expect(receivedViewModel.frames[2].rolls).to.deep.equal(['X', 'X', '9']);
 	});
     
     it('final score should come from the game object', () => {
