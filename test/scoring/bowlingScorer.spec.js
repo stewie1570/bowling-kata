@@ -43,7 +43,7 @@ describe('Scoring', () => {
                         { rolls: [10, 10, 10] }
                     ]
                 });
-            
+
             expect(scoreBoard.total).to.equal(300);
             expect(scoreBoard.frames).to.deep.equal([
                 { rolls: [10], total: 30 },
@@ -112,6 +112,24 @@ describe('Scoring', () => {
             expect(scoreBoard.frames).to.deep.equal([
                 { rolls: [1, 5], total: 6 },
                 { rolls: [10], total: 14 },
+                { rolls: [3, 1], total: 4 }
+            ]);
+        });
+
+        it('should not score [0,10] as a strike', () => {
+            var scoreBoard = scorer
+                .scoredGameFrom({
+                    frames: [
+                        { rolls: [0, 10] },
+                        { rolls: [1, 9] },
+                        { rolls: [3, 1] }
+                    ]
+                });
+            
+            expect(scoreBoard.total).to.equal(28);
+            expect(scoreBoard.frames).to.deep.equal([
+                { rolls: [0, 10], total: 11 },
+                { rolls: [1, 9], total: 13 },
                 { rolls: [3, 1], total: 4 }
             ]);
         });

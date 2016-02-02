@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import {isStrike, isSpare} from '../scoring/bonus-rules';
+
+var isStrike = frame => _(frame.rolls).some(roll => roll === 10);
+var isSpare = frame => _(frame.rolls).every(roll => roll < 10) && frame.total >= 10;
 
 export class BowlingGameController {
 	constructor({view}) {
