@@ -13,6 +13,7 @@ export var view = {
 				.value()
 				.join(' | '), ' ', border.length - 2)
 		}|`);
+		console.log("|   ----|   ----|   ----|   ----|   ----|   ----|   ----|   ----|   ----|   --------|");
 		console.log(`| ${
 			padRight(_(gameViewModel.frames)
 				.map((frame, index) => padLeft(`${frame.total || ''}`, ' ', index === 9 ? 10 : 6))
