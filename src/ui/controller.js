@@ -31,7 +31,7 @@ export class BowlingGameController {
 
 				return {
 					rolls: this._displayRollsIn({ frame }),
-					total: frameIndex === 9 ? game.total : this._isMissingBonusRolls({ frame, futureRollsCount })
+					total: frameIndex === 9 ? game.total : this._isIncompleteFrame({ frame, futureRollsCount })
 						? undefined
 						: _(game.frames)
 							.map(frame => frame.total)
@@ -55,6 +55,10 @@ export class BowlingGameController {
 
 	_isStrikePossibleFor({rollIndex, previousRoll}) {
 		return rollIndex % 2 === 0 || (rollIndex > 0 && previousRoll === 10);
+	}
+	
+	_isIncompleteFrame({frame, futureRollsCount}){
+		return (!isStrike(frame) && frame.rolls.length < 2) || this._isMissingBonusRolls({frame, futureRollsCount});
 	}
 
 	_isMissingBonusRolls({frame, futureRollsCount}) {

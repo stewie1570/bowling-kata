@@ -75,6 +75,24 @@ describe('UI Controller', () => {
 		expect(frameTotals).to.deep.equal([3, 35, undefined, undefined]);
 	});
 	
+	it('should not display total for incomplete frames', () => {
+		//Arrange
+		//Act
+		controller.showGame({game: {
+			frames: [
+                { rolls: [1, 2], total: 3 },
+                { rolls: [3], total: 6 }
+            ]
+		}});
+		
+		//Assert
+		var frameTotals = _(receivedViewModel.frames)
+			.take(2)
+			.map(frame => frame.total)
+			.value();
+		expect(frameTotals).to.deep.equal([3, undefined]);
+	});
+	
 	it('should render spares with a forward slash', () => {
 		//Arrange
 		//Act
