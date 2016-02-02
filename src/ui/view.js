@@ -11,7 +11,7 @@ export var view = {
 		}|`);
 		console.log(`|${
 			_(gameViewModel.frames)
-				.map(frame => `   ${frame.total || ''}`.slice(-3))
+				.map((frame, index) => `     ${frame.total || ''}`.slice(index === 9 ? -5 : -3))
 				.value()
 				.join('|')
 		}|`);
