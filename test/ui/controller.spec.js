@@ -93,7 +93,7 @@ describe('UI Controller', () => {
 		}});
 		
 		//Assert
-		expect(receivedViewModel.frames[0].rolls).to.deep.equal(['', 'X']);
+		expect(receivedViewModel.frames[0].rolls).to.deep.equal([' ', 'X']);
 		expect(receivedViewModel.frames[1].rolls).to.deep.equal(['X', 'X', 'X']);
 	});
 });
