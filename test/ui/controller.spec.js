@@ -10,7 +10,7 @@ describe('UI Controller', () => {
 		controller = new BowlingGameController({ view });
 	});
 		
-	it('should render simple partial games with running total', () => {
+	it('should complete partial games with empty frames and running totals', () => {
 		//Arrange
 		//Act
 		controller.showGame({game: {
@@ -22,14 +22,21 @@ describe('UI Controller', () => {
 		}});
 		
 		//Assert
-		expect(_(receivedViewModel.frames).map(frame => frame.total).value())
+		expect(_(receivedViewModel.frames).take(3).map(frame => frame.total).value())
 			.to.deep.equal([3, 10, 14]);
-			
+		
 		expect(receivedViewModel).to.deep.equal({
 			frames: [
                 { rolls: ['1', '2'], total: 3 },
                 { rolls: ['2', '5'], total: 10 },
-                { rolls: ['3', '1'], total: 14 }
+                { rolls: ['3', '1'], total: 14 },
+				{ rolls: [' ', ' '] },
+				{ rolls: [' ', ' '] },
+				{ rolls: [' ', ' '] },
+				{ rolls: [' ', ' '] },
+				{ rolls: [' ', ' '] },
+				{ rolls: [' ', ' '] },
+				{ rolls: [' ', ' '] }
             ]
 		});
 	});
@@ -62,6 +69,7 @@ describe('UI Controller', () => {
 		
 		//Assert
 		var frameTotals = _(receivedViewModel.frames)
+			.take(4)
 			.map(frame => frame.total)
 			.value();
 		expect(frameTotals).to.deep.equal([3, 35, undefined, undefined]);

@@ -9,8 +9,11 @@ export class BowlingGameController {
 	}
 
 	showGame({game}) {
+		var displayFrames = this._displayFramesFrom({ game });
+		var emptyFrame = { rolls: [' ', ' '] };
+		
 		var gameViewModel = {
-			frames: this._displayFramesFrom({ game })
+			frames: displayFrames.concat(_(Array(10 - displayFrames.length)).map(x => emptyFrame).value())
 		};
 
 		this.view.render(gameViewModel);
