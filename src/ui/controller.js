@@ -25,15 +25,8 @@ export class BowlingGameController {
 					.value()
 					.length;
 
-				var rolls = _(frame.rolls)
-					.map((roll, rollIndex) => rollIndex % 2 === 0 || (rollIndex > 0 && frame.rolls[rollIndex - 1] === 10)
-						? (roll === 10 ? 'X' : roll.toString())
-						: (_(frame.rolls).take(rollIndex + 1).sum() === 10 ? '/' : roll.toString()))
-					.value();
-				var strikeFormattedRolls = rolls.length === 1 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
-
 				return {
-					rolls: strikeFormattedRolls,
+					rolls: this._displayRollsIn({frame}),
 					total: frameIndex === 9 ? game.total : this._isMissingBonusRolls({ frame, futureRollsCount })
 						? undefined
 						: _(game.frames)
@@ -43,6 +36,17 @@ export class BowlingGameController {
 				}
 			})
 			.value()
+	}
+
+	_displayRollsIn({frame}) {
+		var rolls = _(frame.rolls)
+			.map((roll, rollIndex) => rollIndex % 2 === 0 || (rollIndex > 0 && frame.rolls[rollIndex - 1] === 10)
+				? (roll === 10 ? 'X' : roll.toString())
+				: (_(frame.rolls).take(rollIndex + 1).sum() === 10 ? '/' : roll.toString()))
+			.value();
+		var strikeFormattedRolls = rolls.length === 1 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
+		
+		return strikeFormattedRolls;
 	}
 
 	_isMissingBonusRolls({frame, futureRollsCount}) {
