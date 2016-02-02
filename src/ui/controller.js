@@ -25,7 +25,7 @@ export class BowlingGameController {
 
 				return {
 					rolls: this._displayRollsFrom({ frame }),
-					total: this._isMissingBonusRolls({ frame, futureRollsCount })
+					total: frameIndex === 9 ? game.total : this._isMissingBonusRolls({ frame, futureRollsCount })
 						? undefined
 						: _(game.frames)
 							.map(frame => frame.total)

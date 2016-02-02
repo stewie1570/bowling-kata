@@ -96,4 +96,27 @@ describe('UI Controller', () => {
 		expect(receivedViewModel.frames[0].rolls).to.deep.equal([' ', 'X']);
 		expect(receivedViewModel.frames[1].rolls).to.deep.equal(['X', 'X', 'X']);
 	});
+    
+    it('final score should come from the game object', () => {
+		//Arrange
+		//Act
+		controller.showGame({game: {
+            total: 270,
+			frames: [
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [10] },
+                { rolls: [1, 9, 10] },
+            ]
+		}});
+		
+		//Assert
+        expect(_(receivedViewModel.frames).last().total).to.equal(270);
+	});
 });
