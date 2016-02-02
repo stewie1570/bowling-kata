@@ -5,7 +5,7 @@ var padLeft = (str, pad, length) => str.length > length ? str : Array(length - s
 
 export var view = {
 	render: gameViewModel => {
-        var border = "=====================================================================================";
+        var border = "====================================================================================";
 		console.log(border);
 		console.log(`|${
 			padRight(_(gameViewModel.frames)
@@ -16,7 +16,7 @@ export var view = {
 		console.log(`|${
 			padRight(_(gameViewModel.frames)
 				// .map((frame, index) => `       ${frame.total || ''}`.slice(index === 9 ? -7 : -5))
-                .map((frame, index) => padLeft(`${frame.total || ''}`, ' ', index === 9 ? 11 : 6))
+                .map((frame, index) => padLeft(`${frame.total || ''}`, ' ', index === 9 ? 10 : 6))
 				.value()
 				.join(' | '), ' ', border.length - 1)
 		}|`);
