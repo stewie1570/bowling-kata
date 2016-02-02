@@ -5,20 +5,20 @@ var padLeft = (str, pad, length) => str.length > length ? str : Array(length - s
 
 export var view = {
 	render: gameViewModel => {
-        var border = "====================================================================================";
+        var border = "=====================================================================================";
 		console.log(border);
-		console.log(`|${
+		console.log(`| ${
 			padRight(_(gameViewModel.frames)
 				.flatMap(frame => frame.rolls)
 				.value()
-				.join(' | '), ' ', border.length - 1)
+				.join(' | '), ' ', border.length - 2)
 		}|`);
-		console.log(`|${
+		console.log(`| ${
 			padRight(_(gameViewModel.frames)
 				// .map((frame, index) => `       ${frame.total || ''}`.slice(index === 9 ? -7 : -5))
                 .map((frame, index) => padLeft(`${frame.total || ''}`, ' ', index === 9 ? 10 : 6))
 				.value()
-				.join(' | '), ' ', border.length - 1)
+				.join(' | '), ' ', border.length - 2)
 		}|`);
 		console.log(border);
 	}
