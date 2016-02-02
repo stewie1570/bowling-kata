@@ -4,7 +4,7 @@ var minWidth = (str, pad, length) => str + Array(length - str.length).join(pad);
 
 export var view = {
 	render: gameViewModel => {
-        var border = "============================================";
+        var border = "===========================================";
 		console.log(border);
 		console.log(`|${
 			minWidth(_(gameViewModel.frames)
