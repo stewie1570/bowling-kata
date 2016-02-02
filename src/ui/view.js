@@ -15,8 +15,7 @@ export var view = {
 		}|`);
 		console.log(`| ${
 			padRight(_(gameViewModel.frames)
-				// .map((frame, index) => `       ${frame.total || ''}`.slice(index === 9 ? -7 : -5))
-                .map((frame, index) => padLeft(`${frame.total || ''}`, ' ', index === 9 ? 10 : 6))
+				.map((frame, index) => padLeft(`${frame.total || ''}`, ' ', index === 9 ? 10 : 6))
 				.value()
 				.join(' | '), ' ', border.length - 2)
 		}|`);
