@@ -73,13 +73,15 @@ describe('UI Controller', () => {
 		controller.showGame({game: {
 			frames: [
                 { rolls: [5, 5], total: 15 },
-				{ rolls: [5, 5, 5], total: 15 }
+				{ rolls: [5, 5, 5], total: 15 },
+				{ rolls: [0, 10], total: 10 }
             ]
 		}});
 		
 		//Assert
 		expect(receivedViewModel.frames[0].rolls).to.deep.equal(['5', '/']);
 		expect(receivedViewModel.frames[1].rolls).to.deep.equal(['5', '/', '5']);
+		expect(receivedViewModel.frames[2].rolls).to.deep.equal(['0', '/']);
 	});
 	
 	it('should render strikes with an X', () => {
