@@ -26,7 +26,7 @@ export class BowlingGameController {
 					.length;
 
 				return {
-					rolls: this._displayRollsIn({ frame }),
+					rolls: this._displayRollsIn({ frame, frameIndex }),
 					total: frameIndex === 9 ? game.total : this._isIncompleteFrame({ frame, futureRollsCount })
 						? undefined
 						: _(game.frames)
@@ -45,7 +45,8 @@ export class BowlingGameController {
 			.value());
 	}
 
-	_displayRollsIn({frame}) {
+	_displayRollsIn({frame, frameIndex}) {
+		var emptyRolls = count => _(Array(count)).map(x => ' ').value();
 		var rolls = _(frame.rolls)
 			.map((roll, rollIndex) => this._isStrikePossibleFor({ rollIndex, previousRoll: frame.rolls[rollIndex - 1] })
 				? (roll === 10 ? 'X' : roll.toString())
@@ -53,7 +54,11 @@ export class BowlingGameController {
 			.value();
 		var strikeFormattedRolls = rolls.length === 1 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
 
-		return strikeFormattedRolls;
+		var expectedRolls = frameIndex < 9 ? 2 : 3;
+		
+		return strikeFormattedRolls.length < expectedRolls
+			? strikeFormattedRolls.concat(emptyRolls(expectedRolls - strikeFormattedRolls.length))
+			: strikeFormattedRolls;
 	}
 
 	_isStrikePossibleFor({rollIndex, previousRoll}) {

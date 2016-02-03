@@ -93,6 +93,42 @@ describe('UI Controller', () => {
 		expect(frameTotals).to.deep.equal([3, undefined]);
 	});
 	
+	it('should complete incomplete frames with empty rolls', () => {
+		//Arrange
+		//Act
+		controller.showGame({game: {
+			frames: [
+                { rolls: [1, 2], total: 3 },
+                { rolls: [3], total: 6 }
+            ]
+		}});
+		
+		//Assert
+		expect(receivedViewModel.frames[1].rolls).to.deep.equal(['3', ' ']);
+	});
+	
+	it('should complete incomplete 10th frame with empty rolls', () => {
+		//Arrange
+		//Act
+		controller.showGame({game: {
+			frames: [
+                { rolls: [10], total: 30 },
+                { rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [10], total: 30 },
+				{ rolls: [0], total: 0 },
+            ]
+		}});
+		
+		//Assert
+		expect(receivedViewModel.frames[9].rolls).to.deep.equal(['0', ' ', ' ']);
+	});
+	
 	it('should render spares with a forward slash', () => {
 		//Arrange
 		//Act
