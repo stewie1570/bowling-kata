@@ -40,7 +40,7 @@ export class BowlingGameController {
 		return partialFrames
 			.concat(_(Array(10 - partialFrames.length))
 			.map((x, index) => index + partialFrames.length === 9
-				? { rolls: [' ', ' ', ' '] }
+				? { rolls: [' ', ' ', ' '], total: game.total }
 				: { rolls: [' ', ' '] })
 			.value());
 	}

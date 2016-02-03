@@ -18,7 +18,8 @@ describe('UI Controller', () => {
                 { rolls: [1, 2], total: 3 },
                 { rolls: [2, 5], total: 7 },
                 { rolls: [3, 1], total: 4 }
-            ]
+            ],
+			total: 14
 		}});
 		
 		//Assert
@@ -36,7 +37,7 @@ describe('UI Controller', () => {
 				{ rolls: [' ', ' '] },
 				{ rolls: [' ', ' '] },
 				{ rolls: [' ', ' '] },
-				{ rolls: [' ', ' ', ' '] }
+				{ rolls: [' ', ' ', ' '], total: 14 }
             ]
 		});
 	});
