@@ -70,6 +70,7 @@ export class BowlingGameController {
 			.map((roll, rollIndex) => this._isStrikePossibleFor({ rollIndex, previousRoll: frame.rolls[rollIndex - 1] })
 				? (roll === 10 ? 'X' : roll.toString())
 				: (_(frame.rolls).take(rollIndex + 1).sum() === 10 ? '/' : roll.toString()))
+			.map(charRoll => charRoll == '0' ? '-' : charRoll)
 			.value();
 		return frameIndex < 9 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
 	}

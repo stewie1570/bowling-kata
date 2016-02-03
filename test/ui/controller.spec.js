@@ -122,12 +122,12 @@ describe('UI Controller', () => {
 				{ rolls: [10], total: 30 },
 				{ rolls: [10], total: 30 },
 				{ rolls: [10], total: 30 },
-				{ rolls: [0], total: 0 },
+				{ rolls: [1], total: 1 },
             ]
 		}});
 		
 		//Assert
-		expect(receivedViewModel.frames[9].rolls).to.deep.equal(['0', ' ', ' ']);
+		expect(receivedViewModel.frames[9].rolls).to.deep.equal(['1', ' ', ' ']);
 	});
 	
 	it('should render spares with a forward slash', () => {
@@ -144,7 +144,20 @@ describe('UI Controller', () => {
 		//Assert
 		expect(receivedViewModel.frames[0].rolls).to.deep.equal(['5', '/']);
 		expect(receivedViewModel.frames[1].rolls).to.deep.equal(['5', '/', '5']);
-		expect(receivedViewModel.frames[2].rolls).to.deep.equal(['0', '/']);
+		expect(receivedViewModel.frames[2].rolls).to.deep.equal(['-', '/']);
+	});
+	
+	it('should render 0s (gutters) with a dash', () => {
+		//Arrange
+		//Act
+		controller.showGame({game: {
+			frames: [
+                { rolls: [0, 1], total: 1 }
+            ]
+		}});
+		
+		//Assert
+		expect(receivedViewModel.frames[0].rolls).to.deep.equal(['-', '1']);
 	});
 	
 	it('should render strikes with an X', () => {
