@@ -56,16 +56,16 @@ export class BowlingGameController {
 	}
 
 	_displayRollsIn({frame, frameIndex}) {
-		var emptyRolls = count => _(Array(count)).map(x => ' ').value();
-		var strikeFormattedRolls = this._strikeFormattedRollsFrom({frame, frameIndex});
+		var emptyRolls = ({count}) => _(Array(count)).map(x => ' ').value();
+		var formattedRolls = this._formattedRollsFrom({ frame, frameIndex });
 		var expectedRollCountForFrame = frameIndex < 9 ? 2 : 3;
 
-		return strikeFormattedRolls.length < expectedRollCountForFrame
-			? strikeFormattedRolls.concat(emptyRolls(expectedRollCountForFrame - strikeFormattedRolls.length))
-			: strikeFormattedRolls;
+		return formattedRolls.length < expectedRollCountForFrame
+			? formattedRolls.concat(emptyRolls({ count: expectedRollCountForFrame - formattedRolls.length }))
+			: formattedRolls;
 	}
-	
-	_strikeFormattedRollsFrom({frame, frameIndex}){
+
+	_formattedRollsFrom({frame, frameIndex}) {
 		var rolls = _(frame.rolls)
 			.map((roll, rollIndex) => this._isStrikePossibleFor({ rollIndex, previousRoll: frame.rolls[rollIndex - 1] })
 				? (roll === 10 ? 'X' : roll.toString())
