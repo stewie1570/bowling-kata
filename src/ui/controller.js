@@ -36,13 +36,13 @@ export class BowlingGameController {
 				}
 			})
 			.value();
-			
+
 		return partialFrames
 			.concat(_(Array(10 - partialFrames.length))
-			.map((x, index) => index + partialFrames.length === 9
-				? { rolls: [' ', ' ', ' '], total: game.total }
-				: { rolls: [' ', ' '] })
-			.value());
+				.map((x, index) => index + partialFrames.length === 9
+					? { rolls: [' ', ' ', ' '], total: game.total }
+					: { rolls: [' ', ' '] })
+				.value());
 	}
 
 	_displayRollsIn({frame, frameIndex}) {
@@ -53,9 +53,8 @@ export class BowlingGameController {
 				: (_(frame.rolls).take(rollIndex + 1).sum() === 10 ? '/' : roll.toString()))
 			.value();
 		var strikeFormattedRolls = frameIndex < 9 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
-
 		var expectedRolls = frameIndex < 9 ? 2 : 3;
-		
+
 		return strikeFormattedRolls.length < expectedRolls
 			? strikeFormattedRolls.concat(emptyRolls(expectedRolls - strikeFormattedRolls.length))
 			: strikeFormattedRolls;
@@ -64,9 +63,9 @@ export class BowlingGameController {
 	_isStrikePossibleFor({rollIndex, previousRoll}) {
 		return rollIndex % 2 === 0 || (rollIndex > 0 && previousRoll === 10);
 	}
-	
-	_isIncompleteFrame({frame, futureRollsCount}){
-		return (!isStrike(frame) && frame.rolls.length < 2) || this._isMissingBonusRolls({frame, futureRollsCount});
+
+	_isIncompleteFrame({frame, futureRollsCount}) {
+		return (!isStrike(frame) && frame.rolls.length < 2) || this._isMissingBonusRolls({ frame, futureRollsCount });
 	}
 
 	_isMissingBonusRolls({frame, futureRollsCount}) {
