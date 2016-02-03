@@ -36,7 +36,7 @@ describe('UI Controller', () => {
 				{ rolls: [' ', ' '] },
 				{ rolls: [' ', ' '] },
 				{ rolls: [' ', ' '] },
-				{ rolls: [' ', ' '] }
+				{ rolls: [' ', ' ', ' '] }
             ]
 		});
 	});

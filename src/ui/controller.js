@@ -9,19 +9,15 @@ export class BowlingGameController {
 	}
 
 	showGame({game}) {
-		var displayFrames = this._displayFramesFrom({ game });
-		var emptyFrame = { rolls: [' ', ' '] };
-		var emptyFrames = _(Array(10 - displayFrames.length)).map(x => emptyFrame).value();
-		
 		var gameViewModel = {
-			frames: displayFrames.concat(emptyFrames)
+			frames: this._displayFramesFrom({ game })
 		};
 
 		this.view.render(gameViewModel);
 	}
 
 	_displayFramesFrom({game}) {
-		return _(game.frames)
+		var partialFrames = _(game.frames)
 			.map((frame, frameIndex) => {
 				var futureRollsCount = _(game.frames)
 					.takeRight(game.frames.length - frameIndex - 1)
@@ -39,7 +35,14 @@ export class BowlingGameController {
 							.sum()
 				}
 			})
-			.value()
+			.value();
+			
+		return partialFrames
+			.concat(_(Array(10 - partialFrames.length))
+			.map((x, index) => index + partialFrames.length === 9
+				? { rolls: [' ', ' ', ' '] }
+				: { rolls: [' ', ' '] })
+			.value());
 	}
 
 	_displayRollsIn({frame}) {
