@@ -17,32 +17,42 @@ export class BowlingGameController {
 	}
 
 	_displayFramesFrom({game}) {
-		var partialFrames = _(game.frames)
-			.map((frame, frameIndex) => {
-				var futureRollsCount = _(game.frames)
-					.takeRight(game.frames.length - frameIndex - 1)
-					.flatMap(frame => frame.rolls)
-					.value()
-					.length;
-
-				return {
-					rolls: this._displayRollsIn({ frame, frameIndex }),
-					total: frameIndex === 9 ? game.total : this._isIncompleteFrame({ frame, futureRollsCount })
-						? undefined
-						: _(game.frames)
-							.map(frame => frame.total)
-							.take(frameIndex + 1)
-							.sum()
-				}
-			})
+		var completedFormattedFrames = _(game.frames)
+			.map((frame, frameIndex) => this._toCompleteFormatedFrameFrom({ game, frame, frameIndex }))
 			.value();
 
-		return partialFrames
-			.concat(_(Array(10 - partialFrames.length))
-				.map((x, index) => index + partialFrames.length === 9
-					? { rolls: [' ', ' ', ' '], total: game.total }
-					: { rolls: [' ', ' '] })
-				.value());
+		return completedFormattedFrames.concat(this._emptyFrames({
+			count: 10 - completedFormattedFrames.length,
+			gameTotal: game.total
+		}));
+	}
+
+	_emptyFrames({count, gameTotal}) {
+		var isTenthFrame = ({index, count}) => index === count - 1;
+
+		return _(Array(count))
+			.map((x, index) => isTenthFrame({ index, count })
+				? { rolls: [' ', ' ', ' '], total: gameTotal }
+				: { rolls: [' ', ' '] })
+			.value()
+	}
+
+	_toCompleteFormatedFrameFrom({game, frame, frameIndex}) {
+		var futureRollsCount = _(game.frames)
+			.takeRight(game.frames.length - frameIndex - 1)
+			.flatMap(frame => frame.rolls)
+			.value()
+			.length;
+
+		return {
+			rolls: this._displayRollsIn({ frame, frameIndex }),
+			total: frameIndex === 9 ? game.total : this._isIncompleteFrame({ frame, futureRollsCount })
+				? undefined
+				: _(game.frames)
+					.map(frame => frame.total)
+					.take(frameIndex + 1)
+					.sum()
+		}
 	}
 
 	_displayRollsIn({frame, frameIndex}) {
