@@ -91,6 +91,18 @@ describe('Score Card Parser', () => {
             expect(exceptionMessage).to.equal('Can\'t have more than three rolls in 10th frame.');
         });
         
+        it('10th frame cant have more than two rolls when it\'s not a strike or spare', () => {
+            var exceptionMessage = '';
+            try{
+                parser.unScoredFramesFrom({delimitedScores: '1,0|2,0|3,0|4,0|5,0|6,0|7,0|8,0|9,0|1,2,3'});
+            }
+            catch(ex){
+                exceptionMessage = ex.message;
+            }
+            
+            expect(exceptionMessage).to.equal('Can\'t have more than two rolls in 10th frame when it\'s not a strike or spare.');
+        });
+        
         it('10th frame cant have a frame total more than 30.', () => {
             var exceptionMessage = '';
             try{

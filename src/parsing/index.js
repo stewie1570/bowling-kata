@@ -38,6 +38,9 @@ export class DelimitedStringBowlingScoreCardParser {
 
         if (_(frames).last().rolls.length > 3)
             throw new Error('Can\'t have more than three rolls in 10th frame.');
+            
+        if(frames.length === 10 && _(frames[9].rolls).take(2).sum() < 10 && frames[9].rolls.length > 2)
+            throw new Error('Can\'t have more than two rolls in 10th frame when it\'s not a strike or spare.');
 
         if (_(_(frames).last().rolls).sum() > 30)
             throw new Error('10th frame cant have a frame total more than 30.');
