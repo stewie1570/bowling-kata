@@ -52,7 +52,7 @@ export class BowlingGameController {
 				? (roll === 10 ? 'X' : roll.toString())
 				: (_(frame.rolls).take(rollIndex + 1).sum() === 10 ? '/' : roll.toString()))
 			.value();
-		var strikeFormattedRolls = rolls.length === 1 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
+		var strikeFormattedRolls = frameIndex < 9 && rolls[0] === 'X' ? [' ', 'X'] : rolls;
 
 		var expectedRolls = frameIndex < 9 ? 2 : 3;
 		
