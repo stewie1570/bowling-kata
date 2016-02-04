@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {mapRight} from '../utilities';
 
-var isStrike = frame => _(frame.rolls).first() === 10 && frame.rolls.length === 1;
+var isStrike = frame => _(frame.rolls).first() === 10;
 var isSpare = frame => frame.rolls.length > 1 && _(frame.rolls).sum() >= 10;
 
 export class BowlingScoreBoard {
