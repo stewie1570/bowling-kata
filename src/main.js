@@ -2,12 +2,17 @@ import {DelimitedStringBowlingScoreCardParser} from './parsing';
 import {BowlingScoreBoard} from './scoring';
 import {BowlingGameController} from './ui/controller';
 import {view} from './ui/view';
+import {Ioc} from 'javascript-ioc';
+import {GameProvider} from './providers';
+
+var ioc = new Ioc();
 
 global.process = global.process || { argv: [] };
 
-var frames = new DelimitedStringBowlingScoreCardParser()
-    .unScoredFramesFrom({ delimitedScores: global.process.argv[2] });
+ioc.bind("view", { to: view });
+ioc.bind("scorer", { to: BowlingScoreBoard });
+ioc.bind("parser", { to: DelimitedStringBowlingScoreCardParser });
+ioc.bind("userInput", { toConstant: () => global.process.argv[2] });
+ioc.bind("gameProvider", { to: GameProvider });
 
-var scoredGame = new BowlingScoreBoard().scoredGameFrom({ frames });
-
-new BowlingGameController({ view }).showGame({ game: scoredGame });
+ioc.get(BowlingGameController).showGame();

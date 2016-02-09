@@ -4,13 +4,14 @@ var isStrike = frame => _(frame.rolls).some(roll => roll === 10);
 var isSpare = frame => _(frame.rolls).every(roll => roll < 10) && frame.total >= 10;
 
 export class BowlingGameController {
-	constructor({view}) {
+	constructor(view, gameProvider) {
 		this.view = view;
+		this.gameProvider = gameProvider;
 	}
 
-	showGame({game}) {
+	showGame() {
 		var gameViewModel = {
-			frames: this._displayFramesFrom({ game })
+			frames: this._displayFramesFrom({ game: this.gameProvider.getGame() })
 		};
 
 		this.view.render(gameViewModel);
@@ -87,3 +88,5 @@ export class BowlingGameController {
 		return (isSpare(frame) && futureRollsCount < 1) || (isStrike(frame) && futureRollsCount < 2);
 	}
 }
+
+BowlingGameController.prototype.dependencies = ["view", "gameProvider"];
