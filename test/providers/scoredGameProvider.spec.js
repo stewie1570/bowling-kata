@@ -1,4 +1,4 @@
-import { GameProvider } from '../../src/providers';
+import { GameProvider } from '../../src/providers/gameProvider';
 
 describe('Game Provider', () => {
 	it('Provides a scored game from user input', () => {

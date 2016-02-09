@@ -3,7 +3,7 @@ import {BowlingScoreBoard} from './scoring';
 import {BowlingGameController} from './ui/controller';
 import {view} from './ui/view';
 import {Ioc} from 'javascript-ioc';
-import {GameProvider} from './providers';
+import {GameProvider} from './providers/gameProvider';
 
 var ioc = new Ioc();
 
