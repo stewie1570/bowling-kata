@@ -5,7 +5,7 @@ var padLeft = (str, pad, length) => str.length > length ? str : Array(length - s
 
 export var view = {
 	render: gameViewModel => {
-        var border = "=====================================================================================";
+        var border = "-------------------------------------------------------------------------------------";
 		console.log(border);
 		console.log(`| ${
 			padRight(_(gameViewModel.frames)
