@@ -19,7 +19,7 @@ export class BowlingGameController {
 
 	_displayFramesFrom({game}) {
 		var completedFormattedFrames = _(game.frames)
-			.map((frame, frameIndex) => this._toCompleteFormatedFrameFrom({ game, frame, frameIndex }))
+			.map((frame, frameIndex) => this._toCompleteFormattedFrameFrom({ game, frame, frameIndex }))
 			.value();
 
 		return completedFormattedFrames.concat(this._emptyFrames({
@@ -38,7 +38,7 @@ export class BowlingGameController {
 			.value()
 	}
 
-	_toCompleteFormatedFrameFrom({game, frame, frameIndex}) {
+	_toCompleteFormattedFrameFrom({game, frame, frameIndex}) {
 		var futureRollsCount = _(game.frames)
 			.takeRight(game.frames.length - frameIndex - 1)
 			.flatMap(frame => frame.rolls)
