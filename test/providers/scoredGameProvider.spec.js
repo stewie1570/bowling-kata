@@ -10,11 +10,11 @@ describe('Game Provider', () => {
 				: '(parser received wrong input)'
 		};
 		var scorer = {
-			scoredGameFrom: ({frames}) => frames ===  'unscored frames'
+			scoredGameFrom: ({frames}) => frames === 'unscored frames'
 				? 'scored game'
 				: '(scorer received wrong input)'
 		};
-		var gameProvider = new GameProvider(userInput, parser, scorer); 
+		var gameProvider = new GameProvider({ userInput, parser, scorer }); 
 		
 		//Act
 		var game = gameProvider.getGame();
