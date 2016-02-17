@@ -8,7 +8,7 @@ describe('UI Controller', () => {
 		receivedViewModel;
 		view = { render: vm => receivedViewModel = vm };
 		gameProvider = { getGame: () => providedGame };
-		controller = new BowlingGameController(view, gameProvider);
+		controller = new BowlingGameController({ view, gameProvider });
 	});
 
 	it('should complete partial games with empty frames and running totals', () => {

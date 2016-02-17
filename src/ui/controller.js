@@ -4,7 +4,7 @@ var isStrike = frame => _(frame.rolls).some(roll => roll === 10);
 var isSpare = frame => _(frame.rolls).every(roll => roll < 10) && frame.total >= 10;
 
 export class BowlingGameController {
-	constructor(view, gameProvider) {
+	constructor({view, gameProvider}) {
 		this.view = view;
 		this.gameProvider = gameProvider;
 	}
@@ -89,4 +89,4 @@ export class BowlingGameController {
 	}
 }
 
-BowlingGameController.prototype.dependencies = ["view", "gameProvider"];
+BowlingGameController.prototype.dependencies = [["view", "gameProvider"]];
