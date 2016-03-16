@@ -1,5 +1,5 @@
 #bowling-kata
-
+[![Build](https://api.travis-ci.org/stewie1570/bowling-kata.svg)](https://travis-ci.org/stewie1570/bowling-kata)
 Usage:
 
 	node .\dist\app.js "7,0|10|0,10|10|10|1,8|0,9|10|8,2|0,10,10"
