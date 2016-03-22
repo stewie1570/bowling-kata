@@ -3,7 +3,7 @@ import { GameProvider } from '../../src/providers/gameProvider';
 describe('Game Provider', () => {
 	it('Provides a scored game from user input', () => {
 		//Arrange
-		var userInput = () => 'user input';
+		var userInput = 'user input';
 		var parser = {
 			unScoredFramesFrom: ({delimitedScores}) => delimitedScores === 'user input'
 				? 'unscored frames'

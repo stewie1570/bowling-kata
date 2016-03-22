@@ -6,7 +6,7 @@ export class GameProvider {
 	}
 
 	getGame() {
-		var frames = this.parser.unScoredFramesFrom({ delimitedScores: this.userInput() });
+		var frames = this.parser.unScoredFramesFrom({ delimitedScores: this.userInput });
 
 		return this.scorer.scoredGameFrom({ frames });
 	}
