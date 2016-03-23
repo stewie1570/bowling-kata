@@ -16,7 +16,7 @@ Output:
 	------------------------------------------------------------------------------------- 
 	And here is the dependency graph...just because :)                                    
 	{                                                                                     
-			"name": "BowlingGameController()",                                            
+			"name": "BowlingGameController",                                            
 			"dependencies": [                                                             
 					{                                                                     
 							"name": "view",                                               
