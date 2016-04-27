@@ -9,7 +9,7 @@ describe('Scoring', () => {
     it('should sub-total all frames and grand total the game', () => {
         var scoreBoard = scorer
             .scoredGameFrom({
-                frames: [
+                unscoredFrames: [
                     { rolls: [1, 2] },
                     { rolls: [2, 5] },
                     { rolls: [3, 1] }
@@ -30,7 +30,7 @@ describe('Scoring', () => {
         it('should total 300', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
-                    frames: [
+                    unscoredFrames: [
                         { rolls: [10] },
                         { rolls: [10] },
                         { rolls: [10] },
@@ -64,7 +64,7 @@ describe('Scoring', () => {
         it('should add bonus of the next roll on frames scoring a spare', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
-                    frames: [
+                    unscoredFrames: [
                         { rolls: [1, 9] },
                         { rolls: [2, 5] },
                         { rolls: [3, 1] }
@@ -82,7 +82,7 @@ describe('Scoring', () => {
         it('should total balls rolled without bonus when bonus rolls have not been rolled yet', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
-                    frames: [
+                    unscoredFrames: [
                         { rolls: [1, 5] },
                         { rolls: [1, 9] }
                     ]
@@ -101,7 +101,7 @@ describe('Scoring', () => {
         it('should add bonus of the next two rolls on frames scoring a strike', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
-                    frames: [
+                    unscoredFrames: [
                         { rolls: [1, 5] },
                         { rolls: [10] },
                         { rolls: [3, 1] }
@@ -119,7 +119,7 @@ describe('Scoring', () => {
         it('should not score [0,10] as a strike', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
-                    frames: [
+                    unscoredFrames: [
                         { rolls: [0, 10] },
                         { rolls: [1, 9] },
                         { rolls: [3, 1] }
@@ -137,7 +137,7 @@ describe('Scoring', () => {
         it('should total balls rolled without bonus when bonus rolls have not been rolled yet', () => {
             var scoreBoard = scorer
                 .scoredGameFrom({
-                    frames: [
+                    unscoredFrames: [
                         { rolls: [1, 5] },
                         { rolls: [10] }
                     ]

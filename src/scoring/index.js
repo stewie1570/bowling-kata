@@ -5,8 +5,8 @@ var isStrike = frame => _(frame.rolls).first() === 10;
 var isSpare = frame => frame.rolls.length > 1 && _(frame.rolls).sum() >= 10;
 
 export class BowlingScoreBoard {
-    scoredGameFrom({frames}) {
-        var subTotalledFrames = _(frames)
+    scoredGameFrom({unscoredFrames}) {
+        var subTotalledFrames = _(unscoredFrames)
             .map(frame => {
                 return {
                     rolls: frame.rolls,

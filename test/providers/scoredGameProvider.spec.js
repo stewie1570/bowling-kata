@@ -10,7 +10,7 @@ describe('Game Provider', () => {
 				: '(parser received wrong input)'
 		};
 		var scorer = {
-			scoredGameFrom: ({frames}) => frames === 'unscored frames'
+			scoredGameFrom: ({unscoredFrames}) => unscoredFrames === 'unscored frames'
 				? 'scored game'
 				: '(scorer received wrong input)'
 		};
