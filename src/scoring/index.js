@@ -7,12 +7,7 @@ var isSpare = frame => frame.rolls.length > 1 && _(frame.rolls).sum() >= 10;
 export class BowlingScoreBoard {
     scoredGameFrom({unscoredFrames}) {
         var subTotalledFrames = _(unscoredFrames)
-            .map(frame => {
-                return {
-                    rolls: frame.rolls,
-                    total: _(frame.rolls).sum()
-                };
-            })
+            .map(frame => ({ rolls: frame.rolls, total: _(frame.rolls).sum() }))
             .value();
 
         var bonusAdjustedFrames = this._bonusAdjustedFramesFrom({ subTotalledFrames });

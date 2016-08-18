@@ -5,9 +5,7 @@ export class DelimitedStringBowlingScoreCardParser {
         var frameStrings = delimitedScores.split('|');
 
         var frames = _(frameStrings)
-            .map(frameString => {
-                return { rolls: this._rollsFrom({ frameString }) };
-            })
+            .map(frameString => ({ rolls: this._rollsFrom({ frameString }) }))
             .value();
 
         this._validateLengthsAndTotalsIn({ frames });
