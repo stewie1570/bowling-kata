@@ -1,4 +1,4 @@
-#bowling-kata
+# bowling-kata
 [![Build](https://api.travis-ci.org/stewie1570/bowling-kata.svg)](https://travis-ci.org/stewie1570/bowling-kata)
 
 This Kata includes dogfooding usage of [javascript-ioc](https://github.com/stewie1570/Javascript-IOC).
